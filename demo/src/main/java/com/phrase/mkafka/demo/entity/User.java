@@ -8,10 +8,8 @@ import java.time.ZonedDateTime;
 /**
  * POJO for representing the user, defined as an Entity for the H2 DB
  */
-@Entity
 public class User {
 
-    @Id
     private String id;
     private ZonedDateTime dateCreated;
     private String userName;

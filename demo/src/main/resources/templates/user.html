@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Detail</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>User detail</h1>
+<div class="main_container">
+    <div class="row">
+        <div class="left">User Id:</div>
+        <div class="left" th:text="${user.id}"></div>
+    </div>
+
+    <div class="row">
+        <div class="left">User Name:</div>
+        <div class="left" th:text="${user.userName}"></div>
+    </div>
+
+    <div class="row">
+        <div class="left">First Name:</div>
+        <div class="left" th:text="${user.firstName}"></div>
+    </div>
+
+    <div class="row">
+        <div class="left">Last Name:</div>
+        <div class="left" th:text="${user.lastName}"></div>
+    </div>
+
+    <div class="row">
+        <div class="left">Email:</div>
+        <div class="left" th:text="${user.email}"></div>
+    </div>
+</div>
+
+</body>
+</html>

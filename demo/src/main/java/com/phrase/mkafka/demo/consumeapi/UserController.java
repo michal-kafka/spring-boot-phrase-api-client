@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -29,8 +31,7 @@ public class UserController {
     private HttpClientService httpClientService;
 
     @RequestMapping("/users/{uid}")
-    @ResponseBody
-    private String getUser(@PathVariable Integer uid) {
+    private ModelAndView getUser(@PathVariable Integer uid, Model model) {
 
         //I wanted to learn something new, so I used the RestTemplate for obtaining the JSON data from the response
         String uri = MEMSOURCE_API_URI + MEMSOURCE_API_PATH + "users/" + uid;
@@ -52,14 +53,15 @@ public class UserController {
                 );
 
         User user = responseEntity.getBody();
-        System.out.println(user);
 
-        return "user";
+        ModelAndView modelAndView = new ModelAndView("user");
+        modelAndView.addObject("user", user);
+
+        return modelAndView;
     }
 
     @RequestMapping("/users")
-    @ResponseBody
-    private String getUsers() throws URISyntaxException, IOException, InterruptedException {
+    private ModelAndView getUsers() throws URISyntaxException, IOException, InterruptedException {
 
         HttpResponse<String> response = httpClientService
                 .getHttpClient()
@@ -69,7 +71,10 @@ public class UserController {
 
         System.out.println(users);
 
-        return "users";
+        ModelAndView modelAndView = new ModelAndView("users");
+        modelAndView.addObject("users", users);
+
+        return modelAndView;
     }
 
 

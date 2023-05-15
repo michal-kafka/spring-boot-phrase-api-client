@@ -7,19 +7,16 @@ import jakarta.persistence.OneToOne;
 import java.time.ZonedDateTime;
 
 /**
- * POJO for representing the project, defined as an Entity for the H2 DB
+ * POJO for representing the project, candidate to be an Entity for the H2 DB
  */
-@Entity
 public class Project {
 
-    @Id
     private String id;
 
     private String name;
     private ZonedDateTime dateCreated;
     private Status status;
 
-    @OneToOne
     private User owner;
 
     public String getId() {
