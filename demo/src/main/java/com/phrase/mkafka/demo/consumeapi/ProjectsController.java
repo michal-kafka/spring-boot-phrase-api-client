@@ -5,7 +5,7 @@ import com.phrase.mkafka.demo.utils.HttpClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -19,8 +19,7 @@ public class ProjectsController {
     HttpClientService httpClientService;
 
     @RequestMapping("/projects")
-    @ResponseBody
-    private String getProjects() throws URISyntaxException, IOException, InterruptedException {
+    private ModelAndView getProjects() throws URISyntaxException, IOException, InterruptedException {
 
         HttpResponse<String> response = httpClientService
                 .getHttpClient()
@@ -28,9 +27,10 @@ public class ProjectsController {
 
         List<Project> projects = httpClientService.extractListFromNode(response, "content");
 
-        System.out.println(projects);
+        ModelAndView modelAndView = new ModelAndView("projects");
+        modelAndView.addObject("projects", projects);
 
-        return "project list page";
+        return modelAndView;
     }
 
 }

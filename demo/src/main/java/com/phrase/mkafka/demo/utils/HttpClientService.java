@@ -12,10 +12,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
+import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpResponse;
 import java.util.List;
 
-import static com.phrase.mkafka.demo.utils.Constants.*;
+import static com.phrase.mkafka.demo.utils.Constants.MEMSOURCE_API_URI;
+import static com.phrase.mkafka.demo.utils.Constants.MEMSOURCE_API_PATH;
 import static com.phrase.mkafka.demo.utils.Constants.OBJECT_MAPPER;
 
 @Service
@@ -33,7 +35,7 @@ public class HttpClientService {
     /**
      * A basic wrapper for GET.
      *
-     * @param target - target in the API
+     * @param target target in the API
      * @return GET httpRequest
      * @throws URISyntaxException
      */
@@ -43,6 +45,44 @@ public class HttpClientService {
                 .header("Content-Type", "application/json")
                 .header("Authorization", "ApiToken " + authn.apiToken())
                 .GET()
+                .build();
+
+        return request;
+    }
+
+    /**
+     * A basic wrapper for POST.
+     *
+     * @param target
+     * @param bodyPublisher
+     * @return POST httpRequest
+     * @throws URISyntaxException
+     */
+    public HttpRequest httpPostRequest(final String target, final BodyPublisher bodyPublisher) throws URISyntaxException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(MEMSOURCE_API_URI + MEMSOURCE_API_PATH + target))
+                .header("Content-Type", "application/json")
+                .header("Authorization", "ApiToken " + authn.apiToken())
+                .POST(bodyPublisher)
+                .build();
+
+        return request;
+    }
+
+    /**
+     * A basic wrapper for PUT.
+     *
+     * @param target
+     * @param bodyPublisher
+     * @return PUT httpRequest
+     * @throws URISyntaxException
+     */
+    public HttpRequest httpPutRequest(final String target, final BodyPublisher bodyPublisher) throws URISyntaxException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(MEMSOURCE_API_URI + MEMSOURCE_API_PATH + target))
+                .header("Content-Type", "application/json")
+                .header("Authorization", "ApiToken " + authn.apiToken())
+                .PUT(bodyPublisher)
                 .build();
 
         return request;

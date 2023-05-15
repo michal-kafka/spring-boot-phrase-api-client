@@ -1,9 +1,5 @@
 package com.phrase.mkafka.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-
 import java.time.ZonedDateTime;
 
 /**

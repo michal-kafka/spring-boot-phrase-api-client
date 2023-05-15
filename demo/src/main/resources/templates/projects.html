@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Project List</title>
+</head>
+<body>
+<h1>Project list</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th> Id </th>
+        <th> Name </th>
+        <th> Date Created </th>
+        <th> Owner </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${projects.isEmpty()}">
+        <td colspan="4"> No Users Available </td>
+    </tr>
+    <tr th:each="project : ${projects}">
+        <td><span th:text="${project.id}"> Id </span></td>
+        <td><span th:text="${project.name}">  Name </span></td>
+        <td><span th:text="${project.dateCreated}"> Date created </span></td>
+        <td><span th:text="${project.owner.userName}"> Owner </span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

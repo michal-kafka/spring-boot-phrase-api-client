@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,7 +18,8 @@ import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
 import java.util.List;
 
-import static com.phrase.mkafka.demo.utils.Constants.*;
+import static com.phrase.mkafka.demo.utils.Constants.MEMSOURCE_API_PATH;
+import static com.phrase.mkafka.demo.utils.Constants.MEMSOURCE_API_URI;
 
 @Controller
 public class UserController {
@@ -69,14 +69,30 @@ public class UserController {
 
         List<User> users = httpClientService.extractListFromNode(response, "content");
 
-        System.out.println(users);
-
         ModelAndView modelAndView = new ModelAndView("users");
         modelAndView.addObject("users", users);
 
         return modelAndView;
     }
 
+    @RequestMapping("/users/create")//TODO add corresponding HTML template
+    private ModelAndView createUser(@PathVariable Integer uid, Model model) {
 
+        //TODO calling proper POST wrapper method from the httpClientService
+
+        ModelAndView modelAndView = new ModelAndView("user/create");
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/users/{uid}/create")//TODO add corresponding HTML template
+    private ModelAndView editUser(@PathVariable Integer uid, Model model) {
+
+        //TODO calling proper PUT wrapper method from the httpClientService
+
+        ModelAndView modelAndView = new ModelAndView("user/create");
+
+        return modelAndView;
+    }
 
 }

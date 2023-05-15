@@ -1,7 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>User List</title>
-    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <h1>User list</h1>
@@ -9,17 +8,23 @@
 <table>
     <thead>
     <tr>
+        <th> Id </th>
         <th> First Name </th>
         <th> Last Name </th>
+        <th> Date Created </th>
+        <th> E-mail </th>
     </tr>
     </thead>
     <tbody>
     <tr th:if="${users.isEmpty()}">
-        <td colspan="2"> No Users Available </td>
+        <td colspan="4"> No Users Available </td>
     </tr>
     <tr th:each="user : ${users}">
-        <td><span th:text="${user.firstName}"> Title </span></td>
-        <td><span th:text="${user.lastName}"> Author </span></td>
+        <td><span th:text="${user.id}"> </span></td>
+        <td><span th:text="${user.firstName}"> First name </span></td>
+        <td><span th:text="${user.lastName}"> Last Name </span></td>
+        <td><span th:text="${user.dateCreated}"> Date created </span></td>
+        <td><span th:text="${user.email}"> E-mail </span></td>
     </tr>
     </tbody>
 </table>
