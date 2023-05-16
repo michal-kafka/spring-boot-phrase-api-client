@@ -39,5 +39,6 @@ Best served in IntelliJ Idea (Ultimate)
 
 ### Possible improvements
 
+ - utilize unit tests
  - improving security - utilize Spring Security for custom login page, also improve handling of the API token (I am used to have secrets in the AWS Security Manager) 
  - Common abstract predecessor for the POJO entities from the [com.phrase.mkafka.demo.entity](demo/src/main/java/com/phrase/mkafka/demo/entity) package to carry the wrapper for the paging, etc.  
